@@ -1,6 +1,6 @@
 // Завдання 1 - галерея зображень
 // Створи галерею з можливістю кліку по її елементах і перегляду
-// повнорозмірного зображення у модальному вікні.Подивися демо
+// повнорозмірного зображення у модальному вікні. Подивися демо
 // відео роботи галереї.
 
 // Виконуй це завдання у файлах 01 - gallery.html і 01 - gallery.js.
@@ -15,11 +15,11 @@
 // Відкриття модального вікна по кліку на елементі галереї.
 // Для цього ознайомся з документацією і прикладами.
 // Заміна значення атрибута src елемента < img > в модальному вікні
-// перед відкриттям.Використовуй готову розмітку модального вікна
+// перед відкриттям. Використовуй готову розмітку модального вікна
 // із зображенням з прикладів бібліотеки basicLightbox.
 // Розмітка елемента галереї
 // Посилання на оригінальне зображення повинно зберігатися в data - атрибуті
-// source на елементі < img >, і вказуватися в href посилання.Не додавай
+// source на елементі < img >, і вказуватися в href посилання. Не додавай
 // інші HTML теги або CSS класи, крім тих, що містяться в цьому шаблоні.
 
 // <div class="gallery__item">
@@ -48,5 +48,26 @@
 
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
+
+const galleryEl = document.querySelector('.gallery');
+console.log(galleryEl);
+
+const markup = galleryItems
+  .map(
+    image => `<div class="gallery__item">
+  <a class="gallery__link" href="${image.original}">
+    <img
+      class="gallery__image"
+      src="${image.preview}"
+      data-source="${image.original}"
+      alt="${image.description}"
+    />
+  </a>
+</div>`
+  )
+  .join('');
+console.log(markup);
+
+galleryEl.insertAdjacentHTML('beforeend', markup);
 
 console.log(galleryItems);
