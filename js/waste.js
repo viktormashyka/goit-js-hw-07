@@ -49,6 +49,16 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 //*******************Version 1) *****************/
+const headEl = document.querySelector('head');
+const linkLigtbox = `<link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.css"
+    />`;
+headEl.insertAdjacentHTML('beforeend', linkLigtbox);
+
+const bodyEl = document.querySelector('body');
+const scriptLigtbox = `<script src="https://cdn.jsdelivr.net/npm/basiclightbox@5.0.4/dist/basicLightbox.min.js"></script>`;
+bodyEl.insertAdjacentHTML('beforeend', scriptLigtbox);
 
 const galleryEl = document.querySelector('.gallery');
 // console.log(galleryEl);
@@ -70,3 +80,75 @@ const markup = galleryItems
 console.log(markup);
 
 galleryEl.insertAdjacentHTML('beforeend', markup);
+
+// const source = galleryEl.querySelectorAll('[data-source]');
+// // const source = img.gallery_image.dataset.souce;
+// console.log(source);
+
+// galleryEl.addEventListener('click', openModalZoom);
+
+// function openModalZoom(evt) {
+//   const openImgZoom = evt.target.closest(dataset.source);
+//   console.log(openImgZoom);
+// }
+
+//*****************Version 2)****************/
+// const galleryEl = document.querySelector('.gallery');
+// console.log(galleryEl);
+// // import * as basicLightbox from 'basiclightbox';
+// galleryEl.addEventListener('click', openModalZoom);
+
+// function openModalZoom(evt) {
+//   evt.preventDefault();
+//   console.log('click');
+//   const instance = basicLightbox.create(`<div class="gallery__item">
+//   <a class="gallery__link" href="${image.original}">
+//     <img
+//       class="gallery__image"
+//       src="${image.preview}"
+//       width="800" height="600"
+//       data-source="${image.original}"
+//       alt="${image.description}"
+//     />
+//   </a>
+// </div>`);
+//   const markup = galleryItems.map(image => createElement(image));
+//   galleryEl.append(...markup);
+//   instance.show();
+// }
+
+//*********************************** */
+
+// import * as basicLightbox from 'basiclightbox';
+// const instance = basicLightbox.create(`;
+//     <img src="${image.preview}" width="800" height="600">
+// `);
+// instance.show();
+
+// import * as basicLightbox from 'basiclightbox';
+// const instance = basicLightbox.create(`;
+//     <img src="assets/images/image.png" width="800" height="600">
+// `);
+// instance.show();
+
+// const instance = element => {
+//   const itemEl = basicLightbox.create(`
+// <img src="assets/images/image.png" width="800" height="600">`);
+//   return itemEl;
+// };
+
+// const markup = galleryItems.map(image => createElement(image));
+// galleryEl.append(...markup);
+// instance.show();
+
+// //**Варіант 2)**//
+// const createElements = element => {
+//   const itemEl = document.createElement('li');
+//   itemEl.textContent = element;
+//   return itemEl;
+// };
+
+// const markup = ingredients.map(ingredient => createElements(ingredient));
+
+// console.log(markup);
+// listAllEl.append(...markup);
