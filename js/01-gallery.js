@@ -75,10 +75,20 @@ galleryEl.insertAdjacentHTML('beforeend', markup);
 
 // console.log(basicLightbox);
 
-galleryEl.addEventListener('click', openModalZoom);
+// instance.show();
+// console.log(instance);
 
-function openModalZoom(evt) {
-  const instance = basicLightbox.create(markup);
+const sourceEl = document.querySelector('img[data-source]');
+console.log(sourceEl);
+// console.log(sourceEl.dataset.source);
+
+galleryEl.addEventListener('click', openModalImg);
+
+function openModalImg(evt) {
+  evt.preventDefault();
+  const selectedImg = evt.target.dataset.source;
+  console.log(selectedImg);
+  const instance = basicLightbox.create(selectedImg);
   instance.show();
 }
 
