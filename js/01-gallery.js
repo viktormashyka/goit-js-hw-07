@@ -61,7 +61,7 @@ const markup = galleryItems
       class="gallery__image"
       src="${image.preview}"
       data-source="${image.original}"
-      alt="${image.description}"
+      data-alt="${image.description}"
     />
   </a>
 </div>`
@@ -74,7 +74,23 @@ galleryEl.insertAdjacentHTML('beforeend', markup);
 galleryEl.addEventListener('click', openModalZoom);
 
 function openModalZoom(evt) {
-  // evt.preventDefault();
-  const selectedImg = evt.target.dataset.source;
-  selectedImg.show();
+  basicLightbox.create(markup).show();
 }
+
+//*******Зразки шаблонів basicLightbox */
+
+// document.querySelector('button.image').onclick = () => {
+
+// 	basicLightbox.create(`
+// 		<img width="1400" height="900" src="https://placehold.it/1400x900">
+// 	`).show()
+
+//**** */
+
+// import * as basicLightbox from 'basiclightbox';
+
+// const instance = basicLightbox.create(`
+//     <img src="assets/images/image.png" width="800" height="600">
+// `);
+
+// instance.show();
