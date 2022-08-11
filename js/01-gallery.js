@@ -49,6 +49,8 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 //*******************Version 1) *****************/
+// const basicLightbox = require('basiclightbox');
+// import * as basicLightbox from 'basiclightbox';
 
 const galleryEl = document.querySelector('.gallery');
 // console.log(galleryEl);
@@ -67,14 +69,17 @@ const markup = galleryItems
 </div>`
   )
   .join('');
-console.log(markup);
+// console.log(markup);
 
 galleryEl.insertAdjacentHTML('beforeend', markup);
+
+// console.log(basicLightbox);
 
 galleryEl.addEventListener('click', openModalZoom);
 
 function openModalZoom(evt) {
-  basicLightbox.create(markup).show();
+  const instance = basicLightbox.create(markup);
+  instance.show();
 }
 
 //*******Зразки шаблонів basicLightbox */
