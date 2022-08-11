@@ -70,3 +70,11 @@ const markup = galleryItems
 console.log(markup);
 
 galleryEl.insertAdjacentHTML('beforeend', markup);
+
+galleryEl.addEventListener('click', openModalZoom);
+
+function openModalZoom(evt) {
+  // evt.preventDefault();
+  const selectedImg = evt.target.dataset.source;
+  selectedImg.show();
+}
