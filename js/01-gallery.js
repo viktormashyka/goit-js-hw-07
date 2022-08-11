@@ -62,6 +62,7 @@ const markup = galleryItems
     <img
       class="gallery__image"
       src="${image.preview}"
+      width="800" height="600"
       data-source="${image.original}"
       data-alt="${image.description}"
     />
@@ -69,27 +70,34 @@ const markup = galleryItems
 </div>`
   )
   .join('');
-// console.log(markup);
+console.log(markup);
 
 galleryEl.insertAdjacentHTML('beforeend', markup);
 
 // console.log(basicLightbox);
 
-// instance.show();
-// console.log(instance);
-
-const sourceEl = document.querySelector('img[data-source]');
-console.log(sourceEl);
+// const sourceEl = document.querySelector('img[data-source]');
+// console.log(sourceEl);
 // console.log(sourceEl.dataset.source);
+// let imgEl = document.querySelector('img[src]');
+// console.log(imgEl);
 
 galleryEl.addEventListener('click', openModalImg);
 
 function openModalImg(evt) {
+  //*****Попередній варіант */
+  // evt.preventDefault();
+  // const selectedImg = evt.target.dataset.source;
+  // console.log(selectedImg);
+  // const instance = basicLightbox.create(selectedImg);
+  // instance.show();
+  // *****Виправлений варіант */
   evt.preventDefault();
   const selectedImg = evt.target.dataset.source;
   console.log(selectedImg);
-  const instance = basicLightbox.create(selectedImg);
+  const instance = basicLightbox.create(`<img src="${selectedImg}"/>`);
   instance.show();
+  //***** */
 }
 
 //*******Зразки шаблонів basicLightbox */
