@@ -48,9 +48,6 @@
 
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
-//*******************Version 1) *****************/
-// const basicLightbox = require('basiclightbox');
-// import * as basicLightbox from 'basiclightbox';
 
 const galleryEl = document.querySelector('.gallery');
 // console.log(galleryEl);
@@ -70,34 +67,29 @@ const markup = galleryItems
 </div>`
   )
   .join('');
-console.log(markup);
+// console.log(markup);
 
 galleryEl.insertAdjacentHTML('beforeend', markup);
 
-// console.log(basicLightbox);
+galleryEl.addEventListener('click', onOpenModalImg);
 
-// const sourceEl = document.querySelector('img[data-source]');
-// console.log(sourceEl);
-// console.log(sourceEl.dataset.source);
-// let imgEl = document.querySelector('img[src]');
-// console.log(imgEl);
-
-galleryEl.addEventListener('click', openModalImg);
-
-function openModalImg(evt) {
-  //*****Попередній варіант */
-  // evt.preventDefault();
-  // const selectedImg = evt.target.dataset.source;
-  // console.log(selectedImg);
-  // const instance = basicLightbox.create(selectedImg);
-  // instance.show();
-  // *****Виправлений варіант */
+function onOpenModalImg(evt) {
   evt.preventDefault();
   const selectedImg = evt.target.dataset.source;
   console.log(selectedImg);
   const instance = basicLightbox.create(`<img src="${selectedImg}"/>`);
   instance.show();
-  //***** */
+
+  window.addEventListener('keydown', onEscKeyPress);
+
+  function onEscKeyPress(evt) {
+    console.log(evt.code);
+    const ESC_KEY_CODE = 'Escape';
+    if (evt.code === ESC_KEY_CODE) {
+      window.removeEventListener('keydown', onEscKeyPress);
+      instance.close();
+    }
+  }
 }
 
 //*******Зразки шаблонів basicLightbox */

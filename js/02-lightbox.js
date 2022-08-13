@@ -30,4 +30,28 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-console.log(galleryItems);
+const galleryEl = document.querySelector('.gallery');
+// console.log(galleryEl);
+
+const markup = galleryItems
+  .map(
+    image => `
+<a class="gallery__item" href="${image.original}">
+<img class="gallery__image" src="${image.preview}" width="800" height="600"
+         alt="${image.description}" title="${image.description}"/>
+</a>`
+  )
+  .join('');
+// console.log(markup);
+
+galleryEl.insertAdjacentHTML('beforeend', markup);
+
+galleryEl.addEventListener('click', openModalImg);
+
+function openModalImg(evt) {
+  evt.preventDefault();
+  var lightbox = new SimpleLightbox('.gallery a', {
+    captionPosition: 'bottom',
+    captionDelay: 250,
+  });
+}
