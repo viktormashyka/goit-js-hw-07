@@ -78,18 +78,57 @@ function onOpenModalImg(evt) {
   const selectedImg = evt.target.dataset.source;
   console.log(selectedImg);
   const instance = basicLightbox.create(`<img src="${selectedImg}"/>`);
-  instance.show();
+  instance.show(() => {
+    window.addEventListener('keydown', onEscKeyPress);
+    window.addEventListener('click', onClickPress);
+  });
 
-  window.addEventListener('keydown', onEscKeyPress);
+  // window.addEventListener('keydown', onEscKeyPress);
+
+  function onCloseModalImg(evt) {
+    instance.close(() => {
+      window.removeEventListener('keydown', onEscKeyPress);
+      window.removeEventListener('click', onClickPress);
+    });
+  }
+
+  function onClickPress(evt) {
+    console.log('click');
+    if ('click') {
+      console.log('click close');
+      onCloseModalImg(evt);
+    }
+  }
 
   function onEscKeyPress(evt) {
     console.log(evt.code);
     const ESC_KEY_CODE = 'Escape';
     if (evt.code === ESC_KEY_CODE) {
-      window.removeEventListener('keydown', onEscKeyPress);
-      instance.close();
+      console.log('press close');
+      onCloseModalImg(evt);
     }
   }
+
+  // function onCloseModalImg(evt) {
+  //   if ('click') {
+  //     console.log('click close');
+  //     window.removeEventListener('keydown', onEscKeyPress);
+  //     instance.close(() => {
+  //       window.removeEventListener('keydown', onEscKeyPress);
+  //       window.removeEventListener('click', onCloseModalImg);
+  //     });
+  //   }
+  // }
+
+  // function onEscKeyPress(evt) {
+  //   console.log(evt.code);
+  //   const ESC_KEY_CODE = 'Escape';
+  //   if (evt.code === ESC_KEY_CODE) {
+  //     console.log('press close');
+  //     window.removeEventListener('keydown', onEscKeyPress);
+  //     instance.close(() => window.removeEventListener('keydown', onEscKeyPress));
+  //   }
+  // }
 }
 
 //*******Зразки шаблонів basicLightbox */
