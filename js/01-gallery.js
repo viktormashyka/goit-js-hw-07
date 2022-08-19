@@ -76,59 +76,44 @@ galleryEl.addEventListener('click', onOpenModalImg);
 function onOpenModalImg(evt) {
   evt.preventDefault();
   const selectedImg = evt.target.dataset.source;
-  console.log(selectedImg);
-  const instance = basicLightbox.create(`<img src="${selectedImg}"/>`);
+  // console.log(selectedImg);
+  const instance = basicLightbox.create(`<img src="${selectedImg}"/>`, {
+    /*
+     * Prevents the lightbox from closing when clicking its background.
+     */
+    closable: true,
+    /*
+     * One or more space separated classes to be added to the basicLightbox element.
+     */
+    className: '',
+    /*
+     * Function that gets executed before the lightbox will be shown.
+     * Returning false will prevent the lightbox from showing.
+     */
+    onShow: instance => {
+      console.log('onShow');
+      window.addEventListener('keydown', onEscKeyPress);
+    },
+    /*
+     * Function that gets executed before the lightbox closes.
+     * Returning false will prevent the lightbox from closing.
+     */
+    onClose: instance => {
+      console.log('onClose');
+      window.removeEventListener('keydown', onEscKeyPress);
+    },
+  });
   instance.show(() => {
     window.addEventListener('keydown', onEscKeyPress);
-    window.addEventListener('click', onClickPress);
   });
-
-  // window.addEventListener('keydown', onEscKeyPress);
-
-  function onCloseModalImg(evt) {
-    instance.close(() => {
-      window.removeEventListener('keydown', onEscKeyPress);
-      window.removeEventListener('click', onClickPress);
-    });
-  }
-
-  function onClickPress(evt) {
-    console.log('click');
-    if ('click') {
-      console.log('click close');
-      onCloseModalImg(evt);
-    }
-  }
 
   function onEscKeyPress(evt) {
     console.log(evt.code);
     const ESC_KEY_CODE = 'Escape';
     if (evt.code === ESC_KEY_CODE) {
-      console.log('press close');
-      onCloseModalImg(evt);
+      instance.close();
     }
   }
-
-  // function onCloseModalImg(evt) {
-  //   if ('click') {
-  //     console.log('click close');
-  //     window.removeEventListener('keydown', onEscKeyPress);
-  //     instance.close(() => {
-  //       window.removeEventListener('keydown', onEscKeyPress);
-  //       window.removeEventListener('click', onCloseModalImg);
-  //     });
-  //   }
-  // }
-
-  // function onEscKeyPress(evt) {
-  //   console.log(evt.code);
-  //   const ESC_KEY_CODE = 'Escape';
-  //   if (evt.code === ESC_KEY_CODE) {
-  //     console.log('press close');
-  //     window.removeEventListener('keydown', onEscKeyPress);
-  //     instance.close(() => window.removeEventListener('keydown', onEscKeyPress));
-  //   }
-  // }
 }
 
 //*******Зразки шаблонів basicLightbox */
